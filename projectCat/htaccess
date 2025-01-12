@@ -1,0 +1,11 @@
+# RewriteEngine On
+
+# Rewrite URL for view_category.php
+# RewriteRule ^category/([0-9]+)$ view_category.php?id=$1 [L,QSA]
+
+
+RewriteEngine On
+
+# Rewrite URL for view_category.php using category title
+RewriteRule ^category/([a-zA-Z0-9-]+)$ view_category.php?title=$1 [L,QSA]
+
