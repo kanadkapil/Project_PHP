@@ -3,6 +3,14 @@ include('db.php');
 include('style.php');
 
 
+//session
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit;
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize and validate input fields
     $title = trim($_POST['title']);

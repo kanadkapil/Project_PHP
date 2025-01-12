@@ -2,7 +2,14 @@
 include('db.php');
 include('style.php');
 
+// Session
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit;
+}
 
+// Fetch categories
 $sql = "SELECT * FROM category";
 $result = $conn->query($sql);
 ?>
@@ -20,7 +27,9 @@ $result = $conn->query($sql);
 
 <body class="bg-gray-100">
 
+    <!-- Container -->
     <div class="container mx-auto p-4">
+        <!-- Header Section -->
         <div class="bg-white p-8 rounded-lg shadow-lg">
             <h2 class="text-3xl font-semibold mb-6 text-center text-gray-800">All Categories</h2>
 
@@ -31,29 +40,38 @@ $result = $conn->query($sql);
 
             <!-- Categories Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<div class='card bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transform hover:scale-105 transition duration-300'>
-                                <img src='uploads/" . $row['image'] . "' alt='" . $row['title'] . "' class='w-full h-48 object-cover'>
-                                <div class='p-4'>
-                                    <h3 class='text-xl font-semibold text-gray-800'>" . $row['title'] . "</h3>
-                                    <p class='mt-2 text-gray-600 text-sm'>" . substr($row['description'], 0, 100) . "...</p>
-                                    <div class='mt-4'>
-                                        <a href='update_category.php?id=" . $row['id'] . "' class='btn btn-primary bg-blue-600 text-white py-1 px-3 rounded-md hover:bg-blue-700 text-sm'>Edit</a>
-                                        <a href='delete_category.php?id=" . $row['id'] . "' class='btn btn-danger bg-red-600 text-white py-1 px-3 rounded-md hover:bg-red-700 text-sm'>Delete</a>
-                                    </div>
+                <?php if ($result->num_rows > 0) : ?>
+                    <?php while ($row = $result->fetch_assoc()) : ?>
+                        <div class="card bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transform hover:scale-105 transition duration-300">
+                            <!-- Category Image -->
+                            <img src="uploads/<?php echo htmlspecialchars($row['image']); ?>" alt="<?php echo htmlspecialchars($row['title']); ?>" class="w-full h-48 object-cover">
+                            
+                            <!-- Category Details -->
+                            <div class="p-4">
+                                <h3 class="text-xl font-semibold text-gray-800"><?php echo htmlspecialchars($row['title']); ?></h3>
+                                <p class="mt-2 text-gray-600 text-sm"><?php echo htmlspecialchars(substr($row['description'], 0, 100)) . '...'; ?></p>
+                                
+                                <!-- Action Buttons -->
+                                <div class="mt-4 flex justify-between">
+                                    <a href="view_category.php?id=<?php echo $row['id']; ?>" class="btn btn-info bg-green-600 text-white py-1 px-3 rounded-md hover:bg-green-700 text-sm">View</a>
+                                    <a href="update_category.php?id=<?php echo $row['id']; ?>" class="btn btn-primary bg-blue-600 text-white py-1 px-3 rounded-md hover:bg-blue-700 text-sm">Edit</a>
+                                    <a href="delete_category.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this category?');" class="btn btn-danger bg-red-600 text-white py-1 px-3 rounded-md hover:bg-red-700 text-sm">Delete</a>
                                 </div>
-                            </div>";
-                    }
-                } else {
-                    echo "<div class='col-span-full text-center text-gray-600'>
-                            <p>No categories found.</p>
-                          </div>";
-                }
-                ?>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                <?php else : ?>
+                    <div class="col-span-full text-center text-gray-600">
+                        <p>No categories found.</p>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="mb-6 text-right">
+        <a href="logout.php" class="btn btn-secondary bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-700">Logout</a>
     </div>
 
 </body>

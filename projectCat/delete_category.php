@@ -1,6 +1,13 @@
 <?php
 include('db.php');
 
+//session
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit;
+}
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
@@ -15,9 +22,11 @@ if (isset($_GET['id'])) {
     if ($conn->query($sql) === TRUE) {
         // Delete the image file from the server
         unlink('uploads/' . $category['image']);
-        echo "<script>alert('Category deleted successfully!');</script>";
+        
+        // Redirect to index.php after deletion
+        echo "<script>alert('Category deleted successfully!'); window.location.href = 'index.php';</script>";
     } else {
-        echo "<script>alert('Error: " . $conn->error . "');</script>";
+        echo "<script>alert('Error: " . $conn->error . "'); window.location.href = 'index.php';</script>";
     }
 }
 ?>
