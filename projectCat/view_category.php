@@ -45,6 +45,8 @@ if (isset($_GET['id'])) {
             <h2 class="text-3xl font-semibold mb-6 text-center text-gray-800">
                 <?php echo htmlspecialchars($category['title']); ?>
             </h2>
+            <img src="/projectCat/uploads/<?php echo $row['image']; ?>" alt="<?php echo $row['title']; ?>" class="w-full h-48 object-cover">
+
             <img src="uploads/<?php echo htmlspecialchars($category['image']); ?>" alt="<?php echo htmlspecialchars($category['title']); ?>" class="w-full h-64 object-cover rounded-md mb-4">
             <p class="text-gray-600 mb-6">
                 <?php echo nl2br(htmlspecialchars($category['description'])); ?>
