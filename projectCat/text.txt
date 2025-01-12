@@ -1,0 +1,1 @@
+                                    <a href="category/<?php echo $row['id']; ?>" class="btn btn-info bg-green-600 text-white py-1 px-3 rounded-md hover:bg-green-700 text-sm">View</a>

@@ -53,8 +53,8 @@ $result = $conn->query($sql);
                                 
                                 <!-- Action Buttons -->
                                 <div class="mt-4 flex justify-between">
-                                    <!-- <a href="view_category.php?id=<?php echo $row['id']; ?>" class="btn btn-info bg-green-600 text-white py-1 px-3 rounded-md hover:bg-green-700 text-sm">View</a> -->
-                                    <a href="category/<?php echo $row['id']; ?>" class="btn btn-info bg-green-600 text-white py-1 px-3 rounded-md hover:bg-green-700 text-sm">View</a>
+                                    <!-- here goes a different button im saving it in a text file  -->
+                                    <a href="view_category.php?id=<?php echo $row['id']; ?>" class="btn btn-info bg-green-600 text-white py-1 px-3 rounded-md hover:bg-green-700 text-sm">View</a>
                                     <a href="update_category.php?id=<?php echo $row['id']; ?>" class="btn btn-primary bg-blue-600 text-white py-1 px-3 rounded-md hover:bg-blue-700 text-sm">Edit</a>
                                     <a href="delete_category.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this category?');" class="btn btn-danger bg-red-600 text-white py-1 px-3 rounded-md hover:bg-red-700 text-sm">Delete</a>
                                 </div>
@@ -69,6 +69,7 @@ $result = $conn->query($sql);
             </div>
         </div>
     </div>
+
 
     <!-- Footer Section -->
     <div class="mb-6 text-right">
