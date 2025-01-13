@@ -1,0 +1,30 @@
+my_blog/
+├── admin/
+│   ├── dashboard.php
+│   ├── edit_post.php
+│   ├── edit_profile.php
+│   ├── login.php
+│   ├── logout.php
+│   ├── manage_posts.php
+│   ├── manage_profile.php
+│   ├── create_post.php
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   ├── images/
+│   ├── js/
+│   │   └── main.js
+├── includes/
+│   ├── config.php
+│   ├── db.php
+│   ├── functions.php
+│   ├── header.php
+│   ├── footer.php
+├── public/
+│   ├── index.php
+│   ├── profile.php
+│   ├── view_post.php
+├── sql/
+│   └── database.sql
+└── .htaccess
+

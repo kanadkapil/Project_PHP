@@ -1,0 +1,31 @@
+CREATE TABLE users (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    full_name VARCHAR(255) NOT NULL,
+    profile_pic VARCHAR(255),
+    description TEXT,
+    profession VARCHAR(100)
+);
+
+
+CREATE TABLE category (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    image VARCHAR(255) NOT NULL
+);
+
+
+CREATE TABLE posts (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    article TEXT NOT NULL,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    location VARCHAR(255),
+    image VARCHAR(255),
+    author_id INT(11),
+    category_id INT(11),
+    FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL
+);
