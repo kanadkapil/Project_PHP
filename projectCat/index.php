@@ -16,6 +16,7 @@ $result = $conn->query($sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +26,29 @@ $result = $conn->query($sql);
 </head>
 
 <body class="bg-gray-100">
+
+    <!-- navbar  -->
+
+    <nav class="bg-gray-800 p-4">
+        <div class="max-w-screen-xl mx-auto flex items-center justify-between">
+            <!-- Logo or Brand Name -->
+            <a href="#" class="text-white text-lg font-semibold">MySite</a>
+
+            <!-- Navbar Links (can add more links here) -->
+            <div class="flex space-x-4">
+                <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md">Home</a>
+                <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md">About</a>
+                <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md">Services</a>
+                <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md">Contact</a>
+            </div>
+
+            <!-- Logout Button -->
+            <div class="text-right">
+                <a href="logout.php" class="btn btn-secondary bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-700">Logout</a>
+            </div>
+        </div>
+    </nav>
+
 
     <!-- Container -->
     <div class="container mx-auto p-4">
@@ -44,12 +68,12 @@ $result = $conn->query($sql);
                         <div class="card bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transform hover:scale-105 transition duration-300">
                             <!-- Category Image -->
                             <img src="uploads/<?php echo htmlspecialchars($row['image']); ?>" alt="<?php echo htmlspecialchars($row['title']); ?>" class="w-full h-48 object-cover">
-                            
+
                             <!-- Category Details -->
                             <div class="p-4">
                                 <h3 class="text-xl font-semibold text-gray-800"><?php echo htmlspecialchars($row['title']); ?></h3>
                                 <p class="mt-2 text-gray-600 text-sm"><?php echo htmlspecialchars(substr($row['description'], 0, 100)) . '...'; ?></p>
-                                
+
                                 <!-- Action Buttons -->
                                 <div class="mt-4 flex justify-between">
                                     <!-- here goes a different button im saving it in a text file  -->
@@ -70,10 +94,7 @@ $result = $conn->query($sql);
     </div>
 
 
-    <!-- Footer Section -->
-    <div class="mb-6 text-right">
-        <a href="logout.php" class="btn btn-secondary bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-700">Logout</a>
-    </div>
+
 
 </body>
 
