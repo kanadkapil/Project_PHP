@@ -16,3 +16,19 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (username, password) VALUES ('admin', 'admin123');
+
+
+INSERT INTO users (username, password) 
+VALUES 
+('user1', 'user123'),
+('user2', 'password321'),
+('guest', 'guestpassword');
+
+
+INSERT INTO category (title, description, image) 
+VALUES 
+('Technology', 'All about the latest in tech, gadgets, and innovations.', 'tech.jpg'),
+('Lifestyle', 'Articles about life, health, fitness, and well-being.', 'lifestyle.jpg'),
+('Travel', 'Explore new destinations, cultures, and adventures around the world.', 'travel.jpg'),
+('Food', 'Delicious recipes and culinary delights to satisfy your taste buds.', 'food.jpg'),
+('Business', 'Business strategies, entrepreneurship, and startup tips.', 'business.jpg');
