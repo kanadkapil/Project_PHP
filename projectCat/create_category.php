@@ -2,14 +2,12 @@
 include('db.php');
 include('style.php');
 
-
-//session
+// session
 session_start();
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit;
 }
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize and validate input fields
@@ -37,6 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $image_tmp = $_FILES['image']['tmp_name'];
         $image_ext = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
 
+        // Check image file size (limit to 500 KB)
+        if ($_FILES['image']['size'] > 500 * 1024) { // 500 KB in bytes
+            $errors[] = "Image size should not exceed 500 KB.";
+        }
+
         if (!in_array($image_ext, $allowed_extensions)) {
             $errors[] = "Invalid image format. Allowed formats: jpg, jpeg, png, gif.";
         }
@@ -50,13 +53,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // If there are no errors, proceed with database insertion
     if (empty($errors)) {
+        // Move uploaded file to the "uploads" folder
         move_uploaded_file($image_tmp, $image_path);
-        $sql = "INSERT INTO category (title, description, image) VALUES ('$title', '$description', '$image_name')";
 
-        if ($conn->query($sql) === TRUE) {
-            echo "<script>alert('New category created successfully!'); window.location.href='index.php';</script>";
+        // Prepare the SQL query using placeholders
+        $sql = "INSERT INTO category (title, description, image) VALUES (?, ?, ?)";
+
+        // Prepare the statement
+        if ($stmt = $conn->prepare($sql)) {
+            // Bind parameters: "sss" means 3 strings
+            $stmt->bind_param("sss", $title, $description, $image_name);
+
+            // Execute the statement
+            if ($stmt->execute()) {
+                echo "<script>alert('New category created successfully!'); window.location.href='index.php';</script>";
+            } else {
+                echo "<script>alert('Error: " . $stmt->error . "');</script>";
+            }
+
+            // Close the statement
+            $stmt->close();
         } else {
-            echo "<script>alert('Error: " . $conn->error . "');</script>";
+            echo "<script>alert('Error preparing statement: " . $conn->error . "');</script>";
         }
     } else {
         // Display errors
@@ -67,11 +85,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Category</title>
 </head>
+
 <body class="bg-gray-100">
     <div class="container mx-auto p-4">
         <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
@@ -99,4 +119,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 </body>
+
 </html>

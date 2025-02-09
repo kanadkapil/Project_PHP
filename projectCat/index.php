@@ -36,11 +36,12 @@ $result = $conn->query($sql);
 
             <!-- Navbar Links (can add more links here) -->
             <div class="flex space-x-4">
-                <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md">Home</a>
-                <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md">About</a>
-                <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md">Services</a>
-                <a href="#" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md">Contact</a>
+                <a href="index" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md">Home</a>
+                <a href="about" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md">About</a>
+                <a href="services" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md">Services</a>
+                <a href="contact" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md">Contact</a>
             </div>
+
 
             <!-- Logout Button -->
             <div class="text-right">
@@ -77,7 +78,7 @@ $result = $conn->query($sql);
                                 <!-- Action Buttons -->
                                 <div class="mt-4 flex justify-between">
                                     <!-- here goes a different button im saving it in a text file  -->
-                                    <a href="view_category.php?id=<?php echo $row['id']; ?>" class="btn btn-info bg-green-600 text-white py-1 px-3 rounded-md hover:bg-green-700 text-sm">View</a>
+                                    <a href="view_category/<?php echo $row['id']; ?>" class="btn btn-info bg-green-600 text-white py-1 px-3 rounded-md hover:bg-green-700 text-sm">View</a>
                                     <a href="update_category.php?id=<?php echo $row['id']; ?>" class="btn btn-primary bg-blue-600 text-white py-1 px-3 rounded-md hover:bg-blue-700 text-sm">Edit</a>
                                     <a href="delete_category.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this category?');" class="btn btn-danger bg-red-600 text-white py-1 px-3 rounded-md hover:bg-red-700 text-sm">Delete</a>
                                 </div>
